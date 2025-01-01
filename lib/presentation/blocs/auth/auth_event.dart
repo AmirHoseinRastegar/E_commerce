@@ -7,7 +7,7 @@ class SignUpEvent extends AuthEvent {
   final String email;
   final String password;
   final String name;
-  final DateTime createdAt;
+  final Timestamp createdAt;
 
   SignUpEvent({
     required this.email,

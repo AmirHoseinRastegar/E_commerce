@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_e_commerce/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,15 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +74,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 TextField(
                   controller: passwordController,
+                ), TextField(
+                  controller: confirmPasswordController,
                 ),
                 ElevatedButton(
                     onPressed: () {
@@ -71,10 +83,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             email: emailController.text,
                             password: passwordController.text,
                             name: nameController.text,
-                            createdAt: DateTime.now(),
+                            createdAt: Timestamp.now(),
                           ));
                     },
-                    child: Text('signup'))
+                    child: const Text('signup'))
               ],
             ),
           );

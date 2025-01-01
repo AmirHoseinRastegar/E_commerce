@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_e_commerce/core/failure.dart';
 import 'package:firebase_e_commerce/domain/repository/auth_repository.dart';
 
@@ -23,7 +24,7 @@ class SignUpParams {
   final String name;
   final String email;
   final String password;
-  final DateTime createdAt;
+  final Timestamp createdAt;
 
   SignUpParams(
       {required this.name,
