@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Primary Colors
-  static const Color primaryColor = Color(0xFFFF6F61);  // Soft Red-Orange
+  static const Color primaryColor = Color(0xFFC978E5);  // Soft Red-Orange
   static const Color secondaryColor = Color(0xFF4CAF50);  // Vibrant Green
 
   // Neutral Colors
@@ -41,8 +41,8 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(AppColors.primaryColor),
-          foregroundColor: MaterialStateProperty.all(AppColors.textInverseColor),
+          backgroundColor: MaterialStateProperty.all(AppColors.buttonHoverColor),
+          foregroundColor: MaterialStateProperty.all(AppColors.textSecondaryColor),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -54,10 +54,10 @@ class AppTheme {
         ),
       ),
       appBarTheme:  const AppBarTheme(
-        color: AppColors.darkBackgroundColor,
+        color: AppColors.backgroundColor,
         iconTheme: IconThemeData(color: AppColors.textInverseColor),
         titleTextStyle: TextStyle(
-          color: AppColors.textInverseColor,
+          color: AppColors.textSecondaryColor,
         ),
       ),
       errorColor: AppColors.errorColor,

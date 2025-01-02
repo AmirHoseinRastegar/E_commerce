@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const screenRout= 'home_screen';
   static rout() => MaterialPageRoute(
         builder: (context) => const HomeScreen(),
       );
