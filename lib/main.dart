@@ -1,18 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_e_commerce/core/animated_navigation.dart';
 import 'package:firebase_e_commerce/core/light_theme.dart';
-import 'package:firebase_e_commerce/core/theme.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
-import 'package:firebase_e_commerce/presentation/screens/auth/login_page.dart';
+import 'package:firebase_e_commerce/presentation/screens/auth/onboarding.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
-import 'package:firebase_e_commerce/presentation/screens/auth/sign_up_page.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/splash_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/toggle_loging_register.dart';
 import 'package:firebase_e_commerce/presentation/screens/home_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'core/sl.dart';
@@ -46,6 +42,8 @@ class MyApp extends StatelessWidget {
           ToggleLoginRegister.screenRout: (context) =>
               const ToggleLoginRegister(),
           HomeScreen.screenRout: (context) => const HomeScreen(),
+          PersistLogin.screenRout: (context) =>  PersistLogin(authRepository: sl<AuthRepository>(),),
+          Onboarding.screenRout: (context) => const Onboarding(),
 
         },
         debugShowCheckedModeBanner: false,
