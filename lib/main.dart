@@ -5,7 +5,7 @@ import 'package:firebase_e_commerce/presentation/screens/auth/onboarding.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/splash_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/toggle_loging_register.dart';
-import 'package:firebase_e_commerce/presentation/screens/home_screen.dart';
+import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

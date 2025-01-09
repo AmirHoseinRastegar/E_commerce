@@ -2,7 +2,7 @@ import 'package:firebase_e_commerce/core/shared_preferences.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/onboarding.dart';
+import '../../widgets/onboarding_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboarding extends StatefulWidget {
@@ -19,25 +19,29 @@ class _OnboardingState extends State<Onboarding> {
   final pageController = PageController();
   List<OnboardingWidget> pages = const [
     OnboardingWidget(
-      title: 'Shopping From Everywhere',
-      description: 'as easy as drinking water',
-      image: 'image1',
+      title: 'Discover Your Perfect Finds',
+      description:
+          'Shop from a wide range of products tailored just for you. From daily essentials to exclusive collections, we’ve got it all in one place',
+      image: 'assets/img/onboarding1.jpg',
     ),
     OnboardingWidget(
-      title: 'Best Offers Around',
-      description: 'Find great deals and save more',
-      image: 'image2',
+      title: 'Fast, Easy, and Secure',
+      description:
+          'Enjoy a smooth shopping experience with easy navigation, secure payments, and quick checkouts—all at your fingertips.',
+      image: 'assets/img/onboarding2.jpg',
     ),
     OnboardingWidget(
-      title: 'Fast Delivery',
-      description: 'Delivered to your doorstep in no time',
-      image: 'image3',
+      title: 'Shop More, Earn More',
+      description:
+          'Unlock exclusive discounts, earn reward points, and enjoy personalized offers. Start shopping and get rewarded today!',
+      image: 'assets/img/onboarding3.jpg',
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(children: [
         SafeArea(
           child: PageView.builder(

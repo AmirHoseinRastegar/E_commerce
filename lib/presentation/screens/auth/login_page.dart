@@ -1,11 +1,11 @@
 import 'package:firebase_e_commerce/core/loading.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
-import 'package:firebase_e_commerce/presentation/widgets/elevated_button.dart';
-import 'package:firebase_e_commerce/presentation/widgets/text_form_field.dart';
+import 'package:firebase_e_commerce/presentation/widgets/elevated_button_widget.dart';
+import 'package:firebase_e_commerce/presentation/widgets/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../home_screen.dart';
+import '../home/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   static const screenRout = 'Login_screen';
