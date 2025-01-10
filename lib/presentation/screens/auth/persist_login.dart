@@ -9,7 +9,7 @@ import '../../blocs/persist_login_cubit/persist_login_cubit.dart';
 
 class PersistLogin extends StatelessWidget {
   final AuthRepository authRepository;
-  static const screenRout='persist_login';
+  static const screenRout='/persist_login';
   const PersistLogin({super.key, required this.authRepository});
 
   @override

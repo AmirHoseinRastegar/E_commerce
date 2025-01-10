@@ -9,59 +9,76 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
-  static const screenRout = 'splash_screen';
+  static const screenRout = '/splash_screen';
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  AnimationController? _animationController;
+  Animation<double>? _fadeAnimation;
   bool isAnimated = false;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 100), () {
-      setState(() {
-        isAnimated = true;
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this, // Animation duration
+    );
+    _fadeAnimation =
+        Tween<double>(begin: 1.0, end: 0.0).animate(_animationController!);
+    Future.delayed(const Duration(seconds: 2), () async {
+      await _animationController!.forward().then((_) async {
+        if (await SharedPreferencesHelper.getOnboarding()) {
+          return Navigator.pushNamedAndRemoveUntil(
+            context,
+            PersistLogin.screenRout,
+            (route) => false,
+          );
+        } else {
+          return Navigator.pushNamedAndRemoveUntil(
+            context,
+            Onboarding.screenRout,
+            (route) => false,
+          );
+        }
       });
     });
-    Future.delayed(const Duration(milliseconds: 2500), () async {
-      if (await SharedPreferencesHelper.getOnboarding()) {
-        return Navigator.pushNamedAndRemoveUntil(
-          context,
-          PersistLogin.screenRout,
-          (route) => false,
-        );
-      }else{
-        return Navigator.pushNamedAndRemoveUntil(
-          context,
-          Onboarding.screenRout,
-          (route) => false,
-        );
-      }
-    });
+    // Future.delayed(const Duration(milliseconds: 100), () {
+    //   setState(() {
+    //     isAnimated = true;
+    //   });
+    // });
+    // Future.delayed(const Duration(milliseconds: 2500), () async {
+    //   if (await SharedPreferencesHelper.getOnboarding()) {
+    //     return Navigator.pushNamedAndRemoveUntil(
+    //       context,
+    //       PersistLogin.screenRout,
+    //       (route) => false,
+    //     );
+    //   } else {
+    //     return Navigator.pushNamedAndRemoveUntil(
+    //       context,
+    //       Onboarding.screenRout,
+    //       (route) => false,
+    //     );
+    //   }
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
-        AnimatedPositioned(
-          duration: const Duration(seconds: 1),
-          curve: Curves.easeInOut,
-          top: isAnimated ? MediaQuery.of(context).size.height / 3 : 0,
-          left: MediaQuery.of(context).size.width / 2 - 50,
-          child: AnimatedOpacity(
-            opacity: isAnimated ? 1.0 : 0.0,
-            duration: const Duration(seconds: 1),
-            child: const Icon(
-              Icons.front_loader,
-              size: 100,
-            ),
-          ),
+      backgroundColor: Colors.white, // Set your splash screen background color
+      body: FadeTransition(
+        opacity: _fadeAnimation!,
+        child: Center(
+          child: Image.asset('assets/img/splash_icon.png',height: 130,),
         ),
-      ]),
+      ),
     );
   }
 }

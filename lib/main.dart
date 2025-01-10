@@ -35,16 +35,39 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-
+        onGenerateRoute: (settings) {
+          // Handle custom transitions for named routes
+          switch (settings.name) {
+            case '/splash_screen':
+              return FadePageRoute(
+                child: const SplashScreen(),
+              );
+            case '/onboarding_screen':
+              return FadePageRoute(
+                child: const Onboarding(),
+              );
+            case '/toggle_login_register_screen':
+              return FadePageRoute(
+                child: const ToggleLoginRegister(),
+              );
+            case '/persist_login':
+              return FadePageRoute(
+                child:  PersistLogin(authRepository: sl<AuthRepository>(),),
+              );
+            default:
+              return null;
+          }
+        },
         initialRoute: SplashScreen.screenRout,
         routes: {
           SplashScreen.screenRout: (context) => const SplashScreen(),
           ToggleLoginRegister.screenRout: (context) =>
               const ToggleLoginRegister(),
           HomeScreen.screenRout: (context) => const HomeScreen(),
-          PersistLogin.screenRout: (context) =>  PersistLogin(authRepository: sl<AuthRepository>(),),
+          PersistLogin.screenRout: (context) => PersistLogin(
+                authRepository: sl<AuthRepository>(),
+              ),
           Onboarding.screenRout: (context) => const Onboarding(),
-
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
@@ -56,4 +79,21 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class FadePageRoute extends PageRouteBuilder {
+  final Widget child;
+
+  FadePageRoute({required this.child})
+      : super(
+    pageBuilder: (context, animation, secondaryAnimation) => child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 700),
+  );
 }

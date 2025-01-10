@@ -6,7 +6,7 @@ import '../../widgets/onboarding_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboarding extends StatefulWidget {
-  static const screenRout = 'onboarding_screen';
+  static const screenRout = '/onboarding_screen';
 
   const Onboarding({super.key});
 
