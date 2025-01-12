@@ -3,8 +3,8 @@ class ProductModel {
   final String name;
   final String description;
   final String imageUrl;
-  final double price;
-  final double discount;
+  final num price;
+  final num discount;
   final bool isDiscounted;
   final String category;
 
@@ -37,8 +37,8 @@ class ProductModel {
     String? name,
     String? description,
     String? imageUrl,
-    double? price,
-    double? discount,
+    num? price,
+    num? discount,
     bool? isDiscounted,
     String? category,
   }) {

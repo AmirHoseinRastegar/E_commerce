@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_e_commerce/core/light_theme.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
+import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/onboarding.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/splash_screen.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => sl<AuthBloc>(),
         ),
+        BlocProvider(
+          create: (context) => sl<ProductBloc>(),
+        ),
       ],
       child: MaterialApp(
         onGenerateRoute: (settings) {
@@ -52,7 +56,9 @@ class MyApp extends StatelessWidget {
               );
             case '/persist_login':
               return FadePageRoute(
-                child:  PersistLogin(authRepository: sl<AuthRepository>(),),
+                child: PersistLogin(
+                  authRepository: sl<AuthRepository>(),
+                ),
               );
             default:
               return null;
@@ -81,19 +87,18 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class FadePageRoute extends PageRouteBuilder {
   final Widget child;
 
   FadePageRoute({required this.child})
       : super(
-    pageBuilder: (context, animation, secondaryAnimation) => child,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return FadeTransition(
-        opacity: animation,
-        child: child,
-      );
-    },
-    transitionDuration: const Duration(milliseconds: 700),
-  );
+          pageBuilder: (context, animation, secondaryAnimation) => child,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 700),
+        );
 }
