@@ -4,9 +4,11 @@ import 'package:firebase_e_commerce/data/data_source/product_datasource.dart';
 import 'package:firebase_e_commerce/data/repository/product_repositoryimpl.dart';
 import 'package:firebase_e_commerce/domain/repository/auth_repository.dart';
 import 'package:firebase_e_commerce/domain/repository/product_repository.dart';
+import 'package:firebase_e_commerce/domain/usecases/carousel_usecase.dart';
 import 'package:firebase_e_commerce/domain/usecases/fetch_products_usecase.dart';
 import 'package:firebase_e_commerce/domain/usecases/login_usecase.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
+import 'package:firebase_e_commerce/presentation/blocs/carousel/carousel_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -29,8 +31,11 @@ void setUpDependencies() {
       () => ProductDataSourceImpl(db: sl()));
   sl.registerLazySingleton(() => SignUpUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
+  sl.registerLazySingleton(() => CarouselUseCase(productRepository: sl()));
   sl.registerLazySingleton(() => FetchProductUseCase(productRepository: sl()));
   sl.registerFactory(() =>
       AuthBloc(signUpUseCase: sl(), authRepository: sl(), loginUseCase: sl()));
-  sl.registerFactory(() => ProductBloc(fetchProductUseCase: sl()));
+  sl.registerFactory(() => CarouselBloc(carouselUseCase: sl()));
+  sl.registerFactory(
+      () => ProductBloc(fetchProductUseCase: sl(), carouselUseCase: sl()));
 }

@@ -19,6 +19,8 @@ final class ProductSuccess extends ProductState {
   List<Object?> get props => [productModel];
 }
 
+
+
 final class ProductFailed extends ProductState {
   final String message;
 

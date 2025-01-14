@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_e_commerce/data/model/carousel_model.dart';
 import 'package:firebase_e_commerce/data/model/product_model.dart';
 
 abstract class ProductDataSource {
   Future<List<ProductModel>> fetchProducts();
+  Future< List<CarouselModel>> carousel();
 }
 
 class ProductDataSourceImpl implements ProductDataSource {
@@ -21,4 +23,18 @@ class ProductDataSourceImpl implements ProductDataSource {
     throw Exception('FAILED TO FETCH PRODUCTS : $e');
     }
     }
+
+  @override
+  Future<List<CarouselModel>> carousel() async {
+ try{
+   final data= await db.collection('carousel').get();
+   return data.docs.map((e) {
+
+     return CarouselModel.fromJson(e.data());
+   }).toList();
+
+ }catch(e){
+   throw Exception('FAILED TO FETCH CAROUSELS : $e');
+ }
+  }
   }

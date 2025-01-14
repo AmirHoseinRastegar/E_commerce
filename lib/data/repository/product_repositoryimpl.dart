@@ -1,4 +1,5 @@
 import 'package:firebase_e_commerce/data/data_source/product_datasource.dart';
+import 'package:firebase_e_commerce/data/model/carousel_model.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../core/failure.dart';
@@ -15,6 +16,16 @@ class ProductRepositoryImpl implements ProductRepository {
     try {
       final res = await productDataSource.fetchProducts();
       return right(res);
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CarouselModel>>> carouselFetch() async {
+    try {
+      final result = await productDataSource.carousel();
+      return right(result);
     } catch (e) {
       return left(Failure(e.toString()));
     }
