@@ -3,8 +3,10 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_e_commerce/data/model/carousel_model.dart';
 import 'package:firebase_e_commerce/data/model/product_model.dart';
 import 'package:firebase_e_commerce/domain/usecases/carousel_usecase.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:meta/meta.dart';
 
+import '../../../core/failure.dart';
 import '../../../domain/usecases/fetch_products_usecase.dart';
 
 part 'product_event.dart';
@@ -27,16 +29,29 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       FetchProductEvent event, Emitter<ProductState> emit) async {
     emit(ProductLoading());
     try {
-      final res = await fetchProductUseCase.call(NoParams());
-      res.fold(
-        (l) => emit(
-          ProductFailed(message: l.message),
-        ),
-        (r) => emit(
-          ProductSuccess(productModel: r),
-        ),
+      final results = await Future.wait([
+        fetchProductUseCase.call(NoParams()),
+        carouselUseCase.call(NoParams()),
+      ]);
+
+      final productResult = results[0] as Either<Failure, List<ProductModel>>;
+      final carouselResult = results[1] as Either<Failure, List<CarouselModel>>;
+
+      productResult.fold(
+            (l) => emit(ProductFailed(message: l.message)),
+            (r) {
+          carouselResult.fold(
+                (l) => emit(ProductFailed(message: l.message)),
+                (carousels) => emit(
+              ProductSuccess(
+                productModel: r,
+                carouselModel: carousels,
+              ),
+            ),
+          );
+        },
       );
-    } catch (e) {
+    }  catch (e) {
       emit(ProductFailed(message: e.toString()));
     }
   }

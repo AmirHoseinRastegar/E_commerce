@@ -6,5 +6,4 @@ import '../../data/model/product_model.dart';
 
 abstract class ProductRepository {
   Future<Either<Failure, List<ProductModel>>> fetchProducts();
-  Future<Either<Failure, List<CarouselModel>>> carouselFetch();
 }

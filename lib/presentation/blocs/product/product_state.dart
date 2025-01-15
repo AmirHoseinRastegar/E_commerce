@@ -12,14 +12,13 @@ final class ProductLoading extends ProductState {}
 
 final class ProductSuccess extends ProductState {
   final List<ProductModel> productModel;
+  final List<CarouselModel> carouselModel;
 
-  ProductSuccess({required this.productModel});
+  ProductSuccess({required this.productModel, required this.carouselModel});
 
   @override
-  List<Object?> get props => [productModel];
+  List<Object?> get props => [productModel, carouselModel];
 }
-
-
 
 final class ProductFailed extends ProductState {
   final String message;

@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_e_commerce/data/data_source/carousel_datasource.dart';
 import 'package:firebase_e_commerce/data/data_source/product_datasource.dart';
+import 'package:firebase_e_commerce/data/repository/carousel_repositoryimpl.dart';
 import 'package:firebase_e_commerce/data/repository/product_repositoryimpl.dart';
 import 'package:firebase_e_commerce/domain/repository/auth_repository.dart';
+import 'package:firebase_e_commerce/domain/repository/carousel_repository.dart';
 import 'package:firebase_e_commerce/domain/repository/product_repository.dart';
 import 'package:firebase_e_commerce/domain/usecases/carousel_usecase.dart';
 import 'package:firebase_e_commerce/domain/usecases/fetch_products_usecase.dart';
@@ -23,15 +26,19 @@ void setUpDependencies() {
   sl.registerLazySingleton(() => FirebaseFirestore.instance);
   sl.registerLazySingleton<AuthFirebaseDatasource>(
       () => AuthFireBaseImpl(firebaseAuth: sl(), firebaseFireStore: sl()));
+  sl.registerLazySingleton<CarouselRepository>(
+      () => CarouselRepositoryImpl(carouselDataSource: sl()));
   sl.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(authFirebaseDatasource: sl(), dataBase: sl()));
   sl.registerLazySingleton<ProductRepository>(
       () => ProductRepositoryImpl(productDataSource: sl()));
   sl.registerLazySingleton<ProductDataSource>(
       () => ProductDataSourceImpl(db: sl()));
+  sl.registerLazySingleton<CarouselDataSource>(
+      () => CarouselDataSourceImpl(db: sl()));
   sl.registerLazySingleton(() => SignUpUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
-  sl.registerLazySingleton(() => CarouselUseCase(productRepository: sl()));
+  sl.registerLazySingleton(() => CarouselUseCase(carouselRepository: sl()));
   sl.registerLazySingleton(() => FetchProductUseCase(productRepository: sl()));
   sl.registerFactory(() =>
       AuthBloc(signUpUseCase: sl(), authRepository: sl(), loginUseCase: sl()));

@@ -78,7 +78,6 @@ class MyApp extends StatelessWidget {
                 authRepository: sl<AuthRepository>(),
               ),
           Onboarding.screenRout: (context) => const Onboarding(),
-          TestScreen.screenRout: (context) => const TestScreen(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

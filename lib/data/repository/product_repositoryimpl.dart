@@ -21,13 +21,5 @@ class ProductRepositoryImpl implements ProductRepository {
     }
   }
 
-  @override
-  Future<Either<Failure, List<CarouselModel>>> carouselFetch() async {
-    try {
-      final result = await productDataSource.carousel();
-      return right(result);
-    } catch (e) {
-      return left(Failure(e.toString()));
-    }
-  }
+
 }

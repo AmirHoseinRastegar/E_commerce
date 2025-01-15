@@ -1,3 +1,5 @@
+import 'carousel_model.dart';
+
 class ProductModel {
   final String id;
   final String name;
@@ -8,7 +10,7 @@ class ProductModel {
   final bool isDiscounted;
   final String category;
 
-  ProductModel({
+  ProductModel( {
      this.discount=0.0,
      this.isDiscounted=false,
     required this.name,
@@ -20,6 +22,10 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json, String id) {
+    var carouselList = json['carousels'] as List? ?? [];
+    List<CarouselModel> carousels = carouselList
+        .map((carouselJson) => CarouselModel.fromJson(carouselJson))
+        .toList();
     return ProductModel(
       id: id,
       name: json['name'] ?? '',
