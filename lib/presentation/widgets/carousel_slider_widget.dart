@@ -1,13 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:firebase_e_commerce/presentation/widgets/loading_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../core/loading.dart';
 import '../../data/model/carousel_model.dart';
-import '../blocs/carousel/carousel_bloc.dart';
-import '../blocs/product/product_bloc.dart';
 
 class CarouselSliderWidget extends StatefulWidget {
   final List<CarouselModel> carousel;
@@ -24,14 +19,17 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
     return Column(
       children: [
         CarouselSlider.builder(
+
             itemCount: widget.carousel.length,
             itemBuilder: (context, index, realIndex) {
-              return Container(
-                decoration:  BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Image.network(widget.carousel[index].bannerImage,fit: BoxFit.cover,),
-              );
+              return ClipRRect(
+
+                  borderRadius: BorderRadius.circular(15),
+                  child: CachedNetworkImage(
+
+                    fit: BoxFit.cover,
+                    imageUrl: widget.carousel[index].bannerImage,
+                  ));
             },
             options: CarouselOptions(
               autoPlay: true,

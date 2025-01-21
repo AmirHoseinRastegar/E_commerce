@@ -21,5 +21,13 @@ class ProductRepositoryImpl implements ProductRepository {
     }
   }
 
-
+  @override
+  Future<Either<Failure, List<ProductModel>>> fetchDiscountedProducts() async {
+    try {
+      final result = await productDataSource.fetchDiscountedProducts();
+      return right(result);
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 }
