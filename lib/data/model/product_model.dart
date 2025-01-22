@@ -22,10 +22,7 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json, String id) {
-    var carouselList = json['carousels'] as List? ?? [];
-    List<CarouselModel> carousels = carouselList
-        .map((carouselJson) => CarouselModel.fromJson(carouselJson))
-        .toList();
+
     return ProductModel(
       id: id,
       name: json['name'] ?? '',

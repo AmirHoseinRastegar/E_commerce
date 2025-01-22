@@ -1,14 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_e_commerce/core/light_theme.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
-import 'package:firebase_e_commerce/presentation/blocs/carousel/carousel_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/onboarding.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/splash_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/toggle_loging_register.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
-import 'package:firebase_e_commerce/presentation/screens/test.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,8 +36,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => sl<ProductBloc>(),
-        ),   BlocProvider(
-          create: (context) => sl<CarouselBloc>(),
         ),
       ],
       child: MaterialApp(

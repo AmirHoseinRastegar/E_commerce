@@ -16,7 +16,10 @@ class ProductDataSourceImpl implements ProductDataSource {
   @override
   Future<List<ProductModel>> fetchProducts() async {
     try {
-      final data = await db.collection('product').get();
+      final data = await db
+          .collection('product')
+          .where('isDiscounted', isEqualTo: false )
+          .get();
       return data.docs.map((e) {
         return ProductModel.fromJson(e.data(), e.id);
       }).toList();
@@ -31,7 +34,7 @@ class ProductDataSourceImpl implements ProductDataSource {
   Future<List<ProductModel>> fetchDiscountedProducts() async {
     try {
       final data = await db
-          .collection('products')
+          .collection('product')
           .where('isDiscounted', isEqualTo: true)
           .get();
 

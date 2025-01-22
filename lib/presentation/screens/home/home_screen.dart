@@ -1,4 +1,5 @@
 import 'package:firebase_e_commerce/presentation/widgets/carousel_slider_widget.dart';
+import 'package:firebase_e_commerce/presentation/widgets/discounted_products_widget.dart';
 import 'package:firebase_e_commerce/presentation/widgets/loading_screen.dart';
 import 'package:firebase_e_commerce/presentation/widgets/products_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 40,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(15),
             ),
             child: const TextField(
               decoration: InputDecoration(
@@ -62,7 +63,50 @@ class _HomeScreenState extends State<HomeScreen> {
                     CarouselSliderWidget(
                       carousel: state.carouselModel,
                     ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Special Offers',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('See All'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ProductsList(
+                        productModel: state.discountedProducts),
+
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Products',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('See All'),
+                          ),
+                        ],
+                      ),
+                    ),
                     ProductsList(productModel: state.productModel),
+                    const SizedBox(
+                      height: 8,
+                    ),
                   ],
                 );
               }
