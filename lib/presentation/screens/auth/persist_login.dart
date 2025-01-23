@@ -1,4 +1,5 @@
 import 'package:firebase_e_commerce/domain/repository/auth_repository.dart';
+import 'package:firebase_e_commerce/main_wrapper.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/toggle_loging_register.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/login_page.dart';
@@ -19,7 +20,7 @@ class PersistLogin extends StatelessWidget {
       child: Scaffold(body: BlocBuilder<PersistLoginCubit, PersistLoginState>(
         builder: (BuildContext context, PersistLoginState state) {
           if (state is Authenticated) {
-            return const HomeScreen();
+            return const MainWrapper();
           }
           if (state is UnAuthenticated) {
             return const ToggleLoginRegister();

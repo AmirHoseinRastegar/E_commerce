@@ -1,12 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_e_commerce/core/light_theme.dart';
+import 'package:firebase_e_commerce/main_wrapper.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/onboarding.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/splash_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/toggle_loging_register.dart';
+import 'package:firebase_e_commerce/presentation/screens/cart/cart_screen_navigator.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
+import 'package:firebase_e_commerce/presentation/screens/profile/profile_screen_navigator.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,6 +69,9 @@ class MyApp extends StatelessWidget {
         },
         initialRoute: SplashScreen.screenRout,
         routes: {
+          MainWrapper.screenRout: (context) => const MainWrapper(),
+          CartScreen.screenRout: (context) => const CartScreen(),
+          ProfileScreen.screenRout: (context) => const ProfileScreen(),
           SplashScreen.screenRout: (context) => const SplashScreen(),
           ToggleLoginRegister.screenRout: (context) =>
               const ToggleLoginRegister(),
