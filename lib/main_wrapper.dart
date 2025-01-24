@@ -63,9 +63,9 @@ class _MainWrapperState extends State<MainWrapper> {
         body: IndexedStack(
           index: selectedIndex,
           children: const [
-            HomeScreen(),
-            CartScreen(),
-            ProfileScreen(),
+            HomeScreenNavigator(),
+            CartScreenNavigator(),
+            ProfileScreenNavigator(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

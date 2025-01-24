@@ -1,18 +1,18 @@
 import 'package:firebase_e_commerce/main_wrapper.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreenNavigator extends StatefulWidget {
   static const screenRout = '/profile_screen';
 
-  const ProfileScreen({super.key});
+  const ProfileScreenNavigator({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfileScreenNavigator> createState() => _ProfileScreenNavigatorState();
 }
 
 GlobalKey<NavigatorState> profileKey = GlobalKey<NavigatorState>();
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenNavigatorState extends State<ProfileScreenNavigator> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -22,8 +22,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             settings: settings,
             builder: (context) {
               switch (settings.name) {
-                case ProfileScreen.screenRout:
-                  return const ProfileScreen();
+                case ProfileScreenNavigator.screenRout:
+                  return const ProfileScreenNavigator();
               }
               return Container();
             },

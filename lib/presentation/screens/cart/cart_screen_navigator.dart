@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreenNavigator extends StatefulWidget {
   static const screenRout = '/cart_screen';
 
-  const CartScreen({super.key});
+  const CartScreenNavigator({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  State<CartScreenNavigator> createState() => _CartScreenNavigatorState();
 }
 
 GlobalKey<NavigatorState> cartKey = GlobalKey<NavigatorState>();
 
-class _CartScreenState extends State<CartScreen> {
+class _CartScreenNavigatorState extends State<CartScreenNavigator> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -21,8 +21,8 @@ class _CartScreenState extends State<CartScreen> {
             settings: settings,
             builder: (context) {
               switch (settings.name) {
-                case CartScreen.screenRout:
-                  return const CartScreen();
+                case CartScreenNavigator.screenRout:
+                  return const CartScreenNavigator();
               }
               return Container();
             },

@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/product/product_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const screenRout = 'home_screen';
+  static const screenRout = '/';
 
   static rout() => MaterialPageRoute(
         builder: (context) => const HomeScreen(),
@@ -84,16 +84,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
                 if (state is ProductSuccess) {
                   return Column(
+
                     children: [
                       const SizedBox(
                         height: 10,
                       ),
                       CarouselSliderWidget(carousel: state.carouselModel),
                       const SizedBox(
-                        height: 12,
+                        height: 10,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

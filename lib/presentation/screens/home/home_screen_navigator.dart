@@ -2,7 +2,7 @@ import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenNavigator extends StatefulWidget {
-  static const screenRout = '/home_screen_navigator';
+  static const screenRout = 'home_screen_navigator';
   const HomeScreenNavigator({super.key});
 
   @override
@@ -25,6 +25,7 @@ class _HomeScreenNavigatorState extends State<HomeScreenNavigator> {
 
               }
               return Container();
+
             },
           );
         }

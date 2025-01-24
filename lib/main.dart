@@ -9,6 +9,7 @@ import 'package:firebase_e_commerce/presentation/screens/auth/splash_screen.dart
 import 'package:firebase_e_commerce/presentation/screens/auth/toggle_loging_register.dart';
 import 'package:firebase_e_commerce/presentation/screens/cart/cart_screen_navigator.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
+import 'package:firebase_e_commerce/presentation/screens/home/home_screen_navigator.dart';
 import 'package:firebase_e_commerce/presentation/screens/profile/profile_screen_navigator.dart';
 
 import 'package:flutter/material.dart';
@@ -42,36 +43,37 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        onGenerateRoute: (settings) {
-          // Handle custom transitions for named routes
-          switch (settings.name) {
-            case '/splash_screen':
-              return FadePageRoute(
-                child: const SplashScreen(),
-              );
-            case '/onboarding_screen':
-              return FadePageRoute(
-                child: const Onboarding(),
-              );
-            case '/toggle_login_register_screen':
-              return FadePageRoute(
-                child: const ToggleLoginRegister(),
-              );
-            case '/persist_login':
-              return FadePageRoute(
-                child: PersistLogin(
-                  authRepository: sl<AuthRepository>(),
-                ),
-              );
-            default:
-              return null;
-          }
-        },
+        // onGenerateRoute: (settings) {
+        //   // Handle custom transitions for named routes
+        //   switch (settings.name) {
+        //     case '/splash_screen':
+        //       return FadePageRoute(
+        //         child: const SplashScreen(),
+        //       );
+        //     case '/onboarding_screen':
+        //       return FadePageRoute(
+        //         child: const Onboarding(),
+        //       );
+        //     case '/toggle_login_register_screen':
+        //       return FadePageRoute(
+        //         child: const ToggleLoginRegister(),
+        //       );
+        //     case '/persist_login':
+        //       return FadePageRoute(
+        //         child: PersistLogin(
+        //           authRepository: sl<AuthRepository>(),
+        //         ),
+        //       );
+        //     default:
+        //       return null;
+        //   }
+        // },
         initialRoute: SplashScreen.screenRout,
         routes: {
+          HomeScreenNavigator.screenRout: (context) => const HomeScreenNavigator(),
           MainWrapper.screenRout: (context) => const MainWrapper(),
-          CartScreen.screenRout: (context) => const CartScreen(),
-          ProfileScreen.screenRout: (context) => const ProfileScreen(),
+          CartScreenNavigator.screenRout: (context) => const CartScreenNavigator(),
+          ProfileScreenNavigator.screenRout: (context) => const ProfileScreenNavigator(),
           SplashScreen.screenRout: (context) => const SplashScreen(),
           ToggleLoginRegister.screenRout: (context) =>
               const ToggleLoginRegister(),
