@@ -1,4 +1,3 @@
-import 'carousel_model.dart';
 
 class ProductModel {
   final String id;

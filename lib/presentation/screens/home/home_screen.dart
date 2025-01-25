@@ -1,6 +1,8 @@
+import 'package:firebase_e_commerce/presentation/screens/home/prdocut_details_screen.dart';
 import 'package:firebase_e_commerce/presentation/widgets/carousel_slider_widget.dart';
 import 'package:firebase_e_commerce/presentation/widgets/products_list.dart';
 import 'package:firebase_e_commerce/presentation/widgets/shimmer_loading_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -84,7 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
                 if (state is ProductSuccess) {
                   return Column(
-
                     children: [
                       const SizedBox(
                         height: 10,
@@ -110,7 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      ProductsList(productModel: state.discountedProducts),
+                      ProductsList(
+                          productModel: state.discountedProducts),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(

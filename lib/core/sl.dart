@@ -13,6 +13,7 @@ import 'package:firebase_e_commerce/domain/usecases/fetch_products_usecase.dart'
 import 'package:firebase_e_commerce/domain/usecases/login_usecase.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
+import 'package:firebase_e_commerce/presentation/blocs/product_details/product_details_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../data/data_source/auth_firebase_datasource.dart';
@@ -44,6 +45,7 @@ void setUpDependencies() {
   sl.registerLazySingleton(() => FetchProductUseCase(productRepository: sl()));
   sl.registerFactory(() =>
       AuthBloc(signUpUseCase: sl(), authRepository: sl(), loginUseCase: sl()));
+  sl.registerFactory(() => ProductDetailsBloc(productRepository: sl()));
   sl.registerFactory(() => ProductBloc(
       fetchProductUseCase: sl(),
       carouselUseCase: sl(),

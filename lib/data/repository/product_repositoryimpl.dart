@@ -30,4 +30,15 @@ class ProductRepositoryImpl implements ProductRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, ProductModel>> getProductDetails(String id) async{
+    try {
+      final result =await productDataSource.getProductDetails(id);
+      return right(result);
+
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 }
