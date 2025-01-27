@@ -47,7 +47,8 @@ class _CategoriesViewState extends State<CategoriesView> {
           return Scaffold(
               body: products.isEmpty
                   ? const Center(
-                      child: Text('No products found in this category.'))
+                      child: Text('No products found in this category...'),
+                    )
                   : ListView.builder(
                       itemCount: products.length,
                       itemBuilder: (context, index) {
