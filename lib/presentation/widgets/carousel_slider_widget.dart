@@ -34,7 +34,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.3), // Shadow color
+                        color: Colors.black.withOpacity(0.1), // Shadow color
                         spreadRadius: 2, // Spread radius
                         blurRadius: 5, // Blur radius
                         offset: const Offset(0, 3), // Shadow position

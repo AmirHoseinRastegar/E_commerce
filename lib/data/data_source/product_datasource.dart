@@ -8,6 +8,8 @@ abstract class ProductDataSource {
   Future<List<ProductModel>> fetchDiscountedProducts();
 
   Future<ProductModel> getProductDetails(String id);
+
+  Future<List<ProductModel>> getProductCategory(String category);
 }
 
 class ProductDataSourceImpl implements ProductDataSource {
@@ -56,12 +58,26 @@ class ProductDataSourceImpl implements ProductDataSource {
       final res = await db.collection('product').doc(id).get();
       if (res.exists) {
         return ProductModel.fromJson(res.data()!, res.id);
-      }else{
+      } else {
         throw Exception('FAILED TO FETCH PRODUCT DETAILS');
       }
-
     } catch (e) {
       throw Exception('FAILED TO FETCH PRODUCT DETAILS : $e');
+    }
+  }
+
+  @override
+  Future<List<ProductModel>> getProductCategory(String category) async {
+    try {
+      final result = await db
+          .collection('product')
+          .where('category', isEqualTo: category)
+          .get();
+      return result.docs.map((e) {
+        return ProductModel.fromJson(e.data(), e.id);
+      }).toList();
+    } catch (e) {
+      throw Exception('NO PRODUCTS LOADED');
     }
   }
 }
