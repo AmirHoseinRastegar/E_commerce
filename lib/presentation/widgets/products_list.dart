@@ -27,6 +27,7 @@ class _ProductsListState extends State<ProductsList> {
               itemBuilder: (context, index) {
                 final product = widget.productModel[index];
                 return ProductCard(product: product);
+
               }),
         ),
       ],

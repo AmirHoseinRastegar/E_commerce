@@ -1,28 +1,23 @@
+import 'package:firebase_e_commerce/presentation/screens/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 
-class CartScreenNavigator extends StatefulWidget {
-  static const screenRout = '/cart_screen';
+class CartScreenNavigator extends StatelessWidget {
+  static const screenRout = 'cart_screen_navigator';
 
   const CartScreenNavigator({super.key});
 
   @override
-  State<CartScreenNavigator> createState() => _CartScreenNavigatorState();
-}
-
-GlobalKey<NavigatorState> cartKey = GlobalKey<NavigatorState>();
-
-class _CartScreenNavigatorState extends State<CartScreenNavigator> {
-  @override
   Widget build(BuildContext context) {
     return Navigator(
         key: cartKey,
+        initialRoute: '/',
         onGenerateRoute: (settings) {
           return MaterialPageRoute(
             settings: settings,
             builder: (context) {
               switch (settings.name) {
-                case CartScreenNavigator.screenRout:
-                  return const CartScreenNavigator();
+                case CartScreen.screenRout:
+                  return const CartScreen();
               }
               return Container();
             },
@@ -30,3 +25,5 @@ class _CartScreenNavigatorState extends State<CartScreenNavigator> {
         });
   }
 }
+
+GlobalKey<NavigatorState> cartKey = GlobalKey<NavigatorState>();

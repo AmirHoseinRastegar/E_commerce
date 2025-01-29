@@ -34,6 +34,19 @@ class ProductModel {
     );
   }
 
+  ProductModel toMap() {
+    return ProductModel(
+      id: id,
+      name: name,
+      description: description,
+      imageUrl: imageUrl,
+      price: price,
+      discount: discount,
+      isDiscounted: isDiscounted,
+      category: category,
+    );
+  }
+
   ProductModel copyWith({
     String? id,
     String? name,

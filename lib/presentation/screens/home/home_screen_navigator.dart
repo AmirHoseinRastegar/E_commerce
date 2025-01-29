@@ -1,4 +1,3 @@
-import 'package:firebase_e_commerce/presentation/screens/categories_view/category_view.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/prdocut_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +18,6 @@ class HomeScreenNavigator extends StatelessWidget {
               switch (settings.name) {
                 case HomeScreen.screenRout:
                   return const HomeScreen();
-                // case CategoriesView.screenRout:
-                //   return const CategoriesView();
                 case ProductDetailsScreen.screenRout:
                   final productId = settings.arguments as String;
                   return ProductDetailsScreen(

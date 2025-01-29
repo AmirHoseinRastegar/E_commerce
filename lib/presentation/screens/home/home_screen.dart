@@ -83,8 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
           BlocBuilder<ProductBloc, ProductState>(
             builder: (context, state) {
               if (state is ProductLoading) {
-                return SliverFillRemaining(
-                  child: const ShimmerLoading(),
+                return const SliverFillRemaining(
+                  child: ShimmerLoading(),
                 );
               }
               if (state is ProductSuccess) {
@@ -137,7 +137,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+
+                            },
                             child: const Text('See All'),
                           ),
                         ],
