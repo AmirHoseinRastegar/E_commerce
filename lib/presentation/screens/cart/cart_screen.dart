@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/cart/cart_bloc.dart';
+import '../home/prdocut_details_screen.dart';
 
 class CartScreen extends StatefulWidget {
   static const screenRout = '/';
@@ -15,16 +16,16 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-@override
+  @override
   void initState() {
     super.initState();
-    context.read<CartBloc>().add(LoadCartItems(userId: FirebaseAuth.instance.currentUser!.uid));
+    context
+        .read<CartBloc>()
+        .add(LoadCartItems(userId: FirebaseAuth.instance.currentUser!.uid));
   }
 
   @override
   Widget build(BuildContext context) {
-    final userId = FirebaseAuth.instance.currentUser?.uid;
-    print(FirebaseAuth.instance.currentUser?.uid);
 
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
@@ -34,10 +35,19 @@ class _CartScreenState extends State<CartScreen> {
         if (state is CartSuccess) {
           final cartItems = state.cartItems;
           return ListView.builder(
+            physics: const BouncingScrollPhysics(),
             itemCount: state.cartItems.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetailsScreen(
+                        id: cartItems[index].productId,
+                      ),
+                    ),
+                  );
+                },
                 child: Container(
                   width: 100,
                   height: 250,
@@ -63,7 +73,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               );
-              ;
+
             },
           );
         }

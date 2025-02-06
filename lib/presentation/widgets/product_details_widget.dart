@@ -77,7 +77,7 @@ class ProductDetailsWidget extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Added to cart')));
               }
-            } ,
+            },
             builder: (context, state) {
               if (state is CartLoading) {
                 return const CupertinoActivityIndicator();
@@ -93,10 +93,7 @@ class ProductDetailsWidget extends StatelessWidget {
                   onPressed: () {
                     final cartItem = CartModel(
                       productId: product.id,
-                      // Unique cart item ID
-
                       quantity: 1,
-                      // Default to 1 when adding
                       name: product.name,
                       price: product.price.toDouble(),
                       imageUrl: product.imageUrl,

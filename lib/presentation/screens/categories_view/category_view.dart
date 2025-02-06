@@ -49,23 +49,73 @@ class _CategoriesViewState extends State<CategoriesView> {
                   ? const Center(
                       child: Text('No products found in this category...'),
                     )
-                  : ListView.builder(
-                      itemCount: products.length,
-                      itemBuilder: (context, index) {
-                        final product = products[index];
-                        return ListTile(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return ProductDetailsScreen(id: product.id);
-                              },
-                            ));
-                          },
-                          title: Text(product.name),
-                          subtitle: Text('\$${product.price}'),
-                          leading: Image.network(product.imageUrl),
-                        );
-                      },
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 35,
+                      ),
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          final product = products[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return ProductDetailsScreen(id: product.id);
+                                },
+                              ));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      child: Image.network(
+                                        product.imageUrl,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                Container(
+                                          decoration: const BoxDecoration(
+                                              color: Colors.red,
+                                              shape: BoxShape.circle),
+                                        ),
+                                      )),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    product.name,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '\$${product.price}',
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(product.description,
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500))
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ));
         }
         if (state is CategoriesError) {

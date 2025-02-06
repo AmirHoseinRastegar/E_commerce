@@ -1,9 +1,7 @@
-import 'package:firebase_e_commerce/presentation/screens/home/prdocut_details_screen.dart';
 import 'package:firebase_e_commerce/presentation/widgets/carousel_slider_widget.dart';
 import 'package:firebase_e_commerce/presentation/widgets/category_items.dart';
 import 'package:firebase_e_commerce/presentation/widgets/products_list.dart';
 import 'package:firebase_e_commerce/presentation/widgets/shimmer_loading_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
       child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             pinned: false,
