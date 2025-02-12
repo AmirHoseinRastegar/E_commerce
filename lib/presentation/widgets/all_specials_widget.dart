@@ -1,80 +1,10 @@
-import 'package:firebase_e_commerce/data/model/product_model.dart';
-import 'package:firebase_e_commerce/presentation/screens/home/prdocut_details_screen.dart';
-import 'package:firebase_e_commerce/presentation/widgets/shimmer_loading_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/categories/categories_bloc.dart';
+import '../../data/model/product_model.dart';
+import '../screens/home/prdocut_details_screen.dart';
 
-class CategoriesView extends StatefulWidget {
-  static const String screenRout = 'categories_rout';
-
-  const CategoriesView({super.key});
-
-  @override
-  State<CategoriesView> createState() => _CategoriesViewState();
-}
-
-class _CategoriesViewState extends State<CategoriesView> {
-  bool _isInit = false;
-
-  @override
-  void didChangeDependencies() {
-    ///because context does not get build before full loaded screen we do not use init state
-    ///instead we use didChangeDependencies
-    super.didChangeDependencies();
-    if (!_isInit) {
-      context.read<CategoriesBloc>().add(ResetCategoriesEvent());
-
-      context.read<CategoriesBloc>().add(GetProductCategory(
-          category: ModalRoute.of(context)!.settings.arguments as String));
-      _isInit = true;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // final category = ModalRoute.of(context)!.settings.arguments as String;
-    return BlocBuilder<CategoriesBloc, CategoriesState>(
-      builder: (context, state) {
-        if (state is CategoriesLoading) {
-          return const Center(
-            child: ShimmerLoading(),
-          );
-        }
-        if (state is CategoriesSuccess) {
-          final products = state.loadedRelatedProducts;
-
-          return Scaffold(
-              body: products.isEmpty
-                  ? const Center(
-                      child: Text('No products found in this category...'),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 35,
-                      ),
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: products.length,
-                        itemBuilder: (context, index) {
-                          final product = products[index];
-                          return CategoryWidget(product: product);
-                        },
-                      ),
-                    ));
-        }
-        if (state is CategoriesError) {
-          return Center(child: Text(state.message));
-        }
-        return const SizedBox();
-      },
-    );
-  }
-}
-
-class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({
+class AllSpecialsWidget extends StatelessWidget {
+  const AllSpecialsWidget({
     super.key,
     required this.product,
   });
@@ -137,11 +67,11 @@ class CategoryWidget extends StatelessWidget {
                           },
                           errorBuilder: (context, error, stackTrace) =>
                               Container(
-                            color: Colors.red,
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: const Icon(Icons.error, color: Colors.white),
-                          ),
+                                color: Colors.red,
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: const Icon(Icons.error, color: Colors.white),
+                              ),
                         ),
                       ],
                     ),

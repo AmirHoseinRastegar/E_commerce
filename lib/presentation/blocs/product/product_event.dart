@@ -4,3 +4,4 @@ part of 'product_bloc.dart';
 sealed class ProductEvent {}
 
 class FetchProductEvent extends ProductEvent {}
+class FetchProductReset extends ProductEvent {}

@@ -1,4 +1,3 @@
-import 'package:firebase_e_commerce/main_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreenNavigator extends StatefulWidget {

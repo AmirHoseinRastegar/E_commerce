@@ -25,6 +25,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       required this.carouselUseCase})
       : super(ProductInitial()) {
     on<FetchProductEvent>(onFetchProduct);
+    on<FetchProductReset>((event, emit) {
+      emit(ProductInitial());
+    },);
   }
 
   void onFetchProduct(
