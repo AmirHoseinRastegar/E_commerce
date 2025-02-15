@@ -29,7 +29,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           onError: (error, stackTrace) =>
-              CartError(error.toString()), // Catch errors
+              CartError(error.toString()),
         );
       } catch (e) {
         emit(CartError(e.toString()));
@@ -40,11 +40,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       try {
         await cartRepository.addToCart(event.cartItem, event.userId);
         emit(AddToCartButtonSuccess());
+        add(LoadCartItems( userId: event.userId,));
       } catch (e) {
         emit(CartError(e.toString()));
       }
     });
-
     on<RemoveCartItems>((event, emit) async {
       try {
         await cartRepository.removeFromCart(event.userId, event.productId);

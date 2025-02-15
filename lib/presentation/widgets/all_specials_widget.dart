@@ -95,7 +95,7 @@ class AllSpecialsWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        '\$${product.price}',
+                        '\$${product.price-product.discount}',
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.green,

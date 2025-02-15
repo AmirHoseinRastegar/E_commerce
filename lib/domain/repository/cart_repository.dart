@@ -1,4 +1,3 @@
-import 'package:firebase_e_commerce/data/model/product_model.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../core/failure.dart';

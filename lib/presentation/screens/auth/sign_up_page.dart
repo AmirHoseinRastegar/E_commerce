@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  final _formKey2= GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -63,7 +63,8 @@ class _SignUpPageState extends State<SignUpPage> {
             );
           }
           if (state is AuthSuccess) {
-            Navigator.pushReplacement(context, HomeScreen.rout());
+            Navigator.pushNamedAndRemoveUntil(
+                context, HomeScreen.screenRout, (route) => false);
           }
         },
         builder: (context, state) {
@@ -141,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     CustomElevatedButton(
                       onTap: () {
-                        if (_formKey2.currentState?.validate() ?? false){
+                        if (_formKey2.currentState?.validate() ?? false) {
                           context.read<AuthBloc>().add(SignUpEvent(
                               email: emailController.text,
                               password: passwordController.text,

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/product/product_bloc.dart';
+import '../search/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const screenRout = '/';
@@ -32,153 +33,158 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
-      slivers: [
-        SliverAppBar(
-          pinned: false,
-          floating: true,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          forceElevated: true,
-          toolbarHeight: 65,
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 5,
-                      offset: const Offset(0, 2),
+    return Material(
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            pinned: false,
+            floating: true,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            forceElevated: true,
+            toolbarHeight: 65,
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, SearchScreen.screenRout),
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 5,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search...',
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.clear, color: Colors.grey),
-                      onPressed: () {
-                        // Clear the search text
-                      },
+                    child: const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Icon(Icons.search, color: Colors.grey),
+                        ),
+                        Expanded(
+                          child: Text(
+                            "Search...",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  onChanged: (value) {
-                    // Handle search input changes
-                  },
                 ),
               ),
             ),
           ),
-        ),
-        BlocBuilder<ProductBloc, ProductState>(
-          builder: (context, state) {
-            if (state is ProductLoading) {
-              return const SliverFillRemaining(
-                child: ShimmerLoading(),
+          BlocBuilder<ProductBloc, ProductState>(
+            builder: (context, state) {
+              if (state is ProductLoading) {
+                return const SliverFillRemaining(
+                  child: ShimmerLoading(),
+                );
+              }
+              if (state is ProductSuccess) {
+                return SliverList(
+                  delegate: SliverChildListDelegate([
+                    const SizedBox(height: 10),
+                    CarouselSliderWidget(carousel: state.carouselModel),
+                    const SizedBox(height: 10),
+                    const Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Categories',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 220,
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 1.5,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
+                        itemCount: categories.length,
+                        itemBuilder: (context, index) {
+                          final category = categories[index];
+                          return CategoryItems(category: category);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Special Offers',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, SpecialOffersScreen.screenRout);
+                            },
+                            child: const Text('See All'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ProductsList(productModel: state.discountedProducts),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Products',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, AllProductsScreen.screenRout);
+                            },
+                            child: const Text('See All'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ProductsList(productModel: state.productModel),
+                    const SizedBox(height: 8),
+                  ]),
+                );
+              }
+              return SliverFillRemaining(
+                child: Container(),
               );
-            }
-            if (state is ProductSuccess) {
-              return SliverList(
-                delegate: SliverChildListDelegate([
-                  const SizedBox(height: 10),
-                  CarouselSliderWidget(carousel: state.carouselModel),
-                  const SizedBox(height: 10),
-                  const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Categories',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 1.5,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                    ),
-                    itemCount: categories.length,
-                    itemBuilder: (context, index) {
-                      final category = categories[index];
-                      return CategoryItems(category: category);
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Special Offers',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, SpecialOffersScreen.screenRout);
-                          },
-                          child: const Text('See All'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  ProductsList(productModel: state.discountedProducts),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Products',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, AllProductsScreen.screenRout);
-                          },
-                          child: const Text('See All'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  ProductsList(productModel: state.productModel),
-                  const SizedBox(height: 8),
-                ]),
-              );
-            }
-            return SliverFillRemaining(
-              child: Container(),
-            );
-          },
-        ),
-      ],
+            },
+          ),
+        ],
+      ),
     );
   }
 }

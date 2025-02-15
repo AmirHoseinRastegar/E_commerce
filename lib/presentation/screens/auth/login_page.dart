@@ -1,5 +1,7 @@
 import 'package:firebase_e_commerce/core/loading.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
+import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
+import 'package:firebase_e_commerce/presentation/screens/home/home_screen_navigator.dart';
 import 'package:firebase_e_commerce/presentation/widgets/elevated_button_widget.dart';
 import 'package:firebase_e_commerce/presentation/widgets/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +57,8 @@ class _LoginPageState extends State<LoginPage> {
             );
           }
           if (state is AuthSuccess) {
-            Navigator.pushReplacement(context, HomeScreen.rout());
+            Navigator.pushNamedAndRemoveUntil(
+                context, PersistLogin.screenRout, (route) => false);
           }
         },
         builder: (context, state) {
@@ -73,11 +76,12 @@ class _LoginPageState extends State<LoginPage> {
                     CustomTextFormField(
                       hintText: 'email',
                       controller: emailController,
-                      obscure: false, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your email";
-                      }
-                    },
+                      obscure: false,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "please enter your email";
+                        }
+                      },
                     ),
                     const SizedBox(
                       height: 10,
@@ -85,27 +89,27 @@ class _LoginPageState extends State<LoginPage> {
                     CustomTextFormField(
                         hintText: 'Password',
                         controller: passwordController,
-                        obscure: true, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your password";
-                      }
-                    }
-                    ),
+                        obscure: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "please enter your password";
+                          }
+                        }),
                     const SizedBox(
                       height: 10,
                     ),
                     CustomElevatedButton(
                       onTap: () {
-                      if(_formKey.currentState!.validate()){
-                        context.read<AuthBloc>().add(LoginEvent(
-                            email: emailController.text,
-                            password: passwordController.text));
-                      }
+                        if (_formKey.currentState!.validate()) {
+                          context.read<AuthBloc>().add(LoginEvent(
+                              email: emailController.text,
+                              password: passwordController.text));
+                        }
                       },
                       child: Text(
                         'Login',
-                        style:
-                        TextStyle(fontSize: 25, color: Colors.grey.shade100),
+                        style: TextStyle(
+                            fontSize: 25, color: Colors.grey.shade100),
                       ),
                     ),
                     Row(

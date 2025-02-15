@@ -6,6 +6,7 @@ import 'package:firebase_e_commerce/presentation/blocs/cart/cart_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/categories/categories_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product_details/product_details_bloc.dart';
+import 'package:firebase_e_commerce/presentation/blocs/search/search_bloc.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/onboarding.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/splash_screen.dart';
@@ -52,6 +53,8 @@ class MyApp extends StatelessWidget {
           create: (context) => sl<CategoriesBloc>(),
         ), BlocProvider(
           create: (context) => sl<CartBloc>(),
+        ), BlocProvider(
+          create: (context) => sl<SearchBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -59,6 +62,7 @@ class MyApp extends StatelessWidget {
         initialRoute: SplashScreen.screenRout,
         routes: {
           HomeScreenNavigator.screenRout: (context) => const HomeScreenNavigator(),
+          HomeScreen.screenRout: (context) => const HomeScreen(),
           CategoriesView.screenRout: (context) => const CategoriesView(),
           MainWrapper.screenRout: (context) => const MainWrapper(),
           CartScreenNavigator.screenRout: (context) => const CartScreenNavigator(),

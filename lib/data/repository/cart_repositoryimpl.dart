@@ -15,12 +15,20 @@ class CartRepositoryImpl implements CartRepository {
   Future<Either<Failure, void>> addToCart(CartModel cartModel, String userId) async{
 
     try{
-      await firebaseFirestore
-      .collection('users')
-      .doc(userId)
-      .collection('cart')
-      .doc(cartModel.productId)
-      .set(cartModel.toMap());
+      DocumentReference cartItemRef = firebaseFirestore
+          .collection('users')
+          .doc(userId)
+          .collection('cart')
+          .doc(cartModel.productId);
+
+      var cartItemSnapshot = await cartItemRef.get();
+  if(cartItemSnapshot.exists){
+    int currentQuantity = cartItemSnapshot['quantity'] ?? 1;
+    cartItemRef.update({'quantity': currentQuantity + 1});
+  }else{
+    cartItemRef.set(cartModel.toMap());
+  }
+
       return right(null);
     }catch(e){
       return left(Failure(e.toString()));

@@ -1,9 +1,9 @@
 import 'package:firebase_e_commerce/data/model/product_model.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/prdocut_details_screen.dart';
 import 'package:firebase_e_commerce/presentation/widgets/shimmer_loading_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../blocs/categories/categories_bloc.dart';
 
 class CategoriesView extends StatefulWidget {
@@ -34,7 +34,6 @@ class _CategoriesViewState extends State<CategoriesView> {
 
   @override
   Widget build(BuildContext context) {
-    // final category = ModalRoute.of(context)!.settings.arguments as String;
     return BlocBuilder<CategoriesBloc, CategoriesState>(
       builder: (context, state) {
         if (state is CategoriesLoading) {
@@ -118,8 +117,8 @@ class CategoryWidget extends StatelessWidget {
                           width: double.infinity,
                           height: double.infinity,
                           color: Colors.grey[300], // Light grey background
-                          child: const Center(
-                            child: CircularProgressIndicator(),
+                          child:  Center(
+                            child: Container(),
                           ),
                         ),
                         // Network Image

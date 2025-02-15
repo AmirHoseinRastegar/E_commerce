@@ -10,10 +10,10 @@ class CategoryItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context, rootNavigator: true)
-            .pushNamed(CategoriesView.screenRout, arguments: category);
-
-
+        Navigator.of(context, rootNavigator: true).pushNamed(
+          CategoriesView.screenRout,
+          arguments: category,
+        );
       },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 10),

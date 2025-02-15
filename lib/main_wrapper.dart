@@ -60,6 +60,8 @@ class _MainWrapperState extends State<MainWrapper> {
       canPop: false,
       onPopInvoked: onPopInvoked,
       child: Scaffold(
+        resizeToAvoidBottomInset: true,  // Add this line
+
         body: IndexedStack(
           index: selectedIndex,
           children: const [

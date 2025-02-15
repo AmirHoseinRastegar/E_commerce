@@ -2,6 +2,7 @@ import 'package:firebase_e_commerce/presentation/screens/home/all_products_scree
 import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/prdocut_details_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/special_offers_screen.dart';
+import 'package:firebase_e_commerce/presentation/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenNavigator extends StatelessWidget {
@@ -24,6 +25,8 @@ class HomeScreenNavigator extends StatelessWidget {
                   return const AllProductsScreen();
                 case SpecialOffersScreen.screenRout:
                   return const SpecialOffersScreen();
+                case SearchScreen.screenRout:
+                  return const SearchScreen();
                 case ProductDetailsScreen.screenRout:
                   final productId = settings.arguments as String;
                   return ProductDetailsScreen(
