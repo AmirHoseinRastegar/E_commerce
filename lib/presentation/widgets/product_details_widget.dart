@@ -27,8 +27,6 @@ class ProductDetailsWidget extends StatelessWidget {
       resizeToAvoidBottomInset: true,
 
       body: ListView(
-        padding: const EdgeInsets.only(bottom: 0),
-        shrinkWrap: true,
         children: [
           Container(
             decoration: BoxDecoration(boxShadow: [

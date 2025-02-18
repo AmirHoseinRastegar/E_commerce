@@ -1,5 +1,4 @@
 import 'package:firebase_e_commerce/presentation/screens/home/all_products_screen.dart';
-import 'package:firebase_e_commerce/presentation/screens/categories_view/category_view.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/special_offers_screen.dart';
 import 'package:firebase_e_commerce/presentation/widgets/carousel_slider_widget.dart';
 import 'package:firebase_e_commerce/presentation/widgets/category_items.dart';
@@ -7,7 +6,6 @@ import 'package:firebase_e_commerce/presentation/widgets/products_list.dart';
 import 'package:firebase_e_commerce/presentation/widgets/shimmer_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../blocs/product/product_bloc.dart';
 import '../search/search_screen.dart';
 
@@ -48,7 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, SearchScreen.screenRout),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (context) => const SearchScreen())),
                   child: Container(
                     height: 40,
                     decoration: BoxDecoration(

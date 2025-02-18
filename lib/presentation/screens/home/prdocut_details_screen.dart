@@ -45,7 +45,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               if (state is ProductDetailsSuccess) {
                 final product = state.product;
                 return Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0).copyWith(bottom: 0),
                   child: ProductDetailsWidget(product: product, widget: widget),
                 );
               }

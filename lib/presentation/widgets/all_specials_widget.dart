@@ -43,13 +43,12 @@ class AllSpecialsWidget extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        // Placeholder while loading
                         Container(
                           width: double.infinity,
                           height: double.infinity,
                           color: Colors.grey[300], // Light grey background
-                          child: const Center(
-                            child: CircularProgressIndicator(),
+                          child: Center(
+                            child: Container(),
                           ),
                         ),
                         // Network Image
@@ -67,11 +66,11 @@ class AllSpecialsWidget extends StatelessWidget {
                           },
                           errorBuilder: (context, error, stackTrace) =>
                               Container(
-                                color: Colors.red,
-                                width: double.infinity,
-                                height: double.infinity,
-                                child: const Icon(Icons.error, color: Colors.white),
-                              ),
+                            color: Colors.red,
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: const Icon(Icons.error, color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -95,7 +94,7 @@ class AllSpecialsWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        '\$${product.price-product.discount}',
+                        '\$${product.price - product.discount}',
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.green,

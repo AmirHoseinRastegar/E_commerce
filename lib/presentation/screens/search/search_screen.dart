@@ -14,16 +14,13 @@ class SearchScreen extends StatelessWidget {
     TextEditingController searchController = TextEditingController();
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,  // Add this line
-
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Container(
+        title: SizedBox(
           height: 40,
-
           child: TextField(
             controller: searchController,
             autofocus: true,
@@ -35,7 +32,9 @@ class SearchScreen extends StatelessWidget {
                 icon: const Icon(Icons.clear, color: Colors.grey),
                 onPressed: () {
                   searchController.clear();
-                  context.read<SearchBloc>().add(SearchProductsEvent(query: ""));
+                  // context
+                  //     .read<SearchBloc>()
+                  //     .add(SearchProductsEvent(query: ""));
                 },
               ),
             ),
@@ -50,7 +49,9 @@ class SearchScreen extends StatelessWidget {
           if (state is SearchLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is SearchSuccess) {
-            return state.products.isEmpty
+            return state.products.isEmpty ||
+                    searchController.text.isEmpty ||
+                    searchController.text == ''
                 ? const Center(child: Text("No results found"))
                 : ListView.builder(
                     itemCount: state.products.length,
@@ -65,7 +66,6 @@ class SearchScreen extends StatelessWidget {
                           Navigator.pushNamed(
                               context, ProductDetailsScreen.screenRout,
                               arguments: product.id);
-                          // Navigator.pop(context);
                         },
                       );
                     },

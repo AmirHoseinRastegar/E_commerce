@@ -25,8 +25,8 @@ class HomeScreenNavigator extends StatelessWidget {
                   return const AllProductsScreen();
                 case SpecialOffersScreen.screenRout:
                   return const SpecialOffersScreen();
-                case SearchScreen.screenRout:
-                  return const SearchScreen();
+                // case SearchScreen.screenRout:
+                //   return const SearchScreen();
                 case ProductDetailsScreen.screenRout:
                   final productId = settings.arguments as String;
                   return ProductDetailsScreen(

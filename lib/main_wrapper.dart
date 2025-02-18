@@ -1,6 +1,5 @@
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:firebase_e_commerce/presentation/screens/cart/cart_screen_navigator.dart';
-import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/home_screen_navigator.dart';
 import 'package:firebase_e_commerce/presentation/screens/profile/profile_screen_navigator.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +59,7 @@ class _MainWrapperState extends State<MainWrapper> {
       canPop: false,
       onPopInvoked: onPopInvoked,
       child: Scaffold(
-        resizeToAvoidBottomInset: true,  // Add this line
+        resizeToAvoidBottomInset: true, // Add this line
 
         body: IndexedStack(
           index: selectedIndex,
