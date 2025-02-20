@@ -1,5 +1,4 @@
 import 'package:firebase_e_commerce/data/data_source/product_datasource.dart';
-import 'package:firebase_e_commerce/data/model/carousel_model.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../core/failure.dart';

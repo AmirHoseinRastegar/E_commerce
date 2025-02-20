@@ -1,3 +1,4 @@
+import 'package:firebase_e_commerce/presentation/screens/profile/test.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreenNavigator extends StatefulWidget {
@@ -15,14 +16,15 @@ class _ProfileScreenNavigatorState extends State<ProfileScreenNavigator> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
+        initialRoute: '/',
         key: profileKey,
         onGenerateRoute: (settings) {
           return MaterialPageRoute(
             settings: settings,
             builder: (context) {
               switch (settings.name) {
-                case ProfileScreenNavigator.screenRout:
-                  return const ProfileScreenNavigator();
+                case ProductUploader.screenRout:
+                  return ProductUploader();
               }
               return Container();
             },

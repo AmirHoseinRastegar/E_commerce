@@ -34,17 +34,17 @@ class ProductModel {
     );
   }
 
-  ProductModel toMap() {
-    return ProductModel(
-      id: id,
-      name: name,
-      description: description,
-      imageUrl: imageUrl,
-      price: price,
-      discount: discount,
-      isDiscounted: isDiscounted,
-      category: category,
-    );
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'description': description,
+      'imageUrl': imageUrl,
+      'price': price,
+      'discount': discount,
+      'isDiscounted': isDiscounted,
+      'category': category,
+      'id':id
+    };
   }
 
   ProductModel copyWith({

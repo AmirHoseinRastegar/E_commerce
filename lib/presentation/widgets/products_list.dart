@@ -15,24 +15,21 @@ class ProductsList extends StatefulWidget {
 class _ProductsListState extends State<ProductsList> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          height: 130,
-          child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: widget.productModel.length,
-              itemBuilder: (context, index) {
-                final product = widget.productModel[index];
-                return ProductCard(product: product);
-
-              }),
-        ),
-      ],
+    return SizedBox(
+      height: 130,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: widget.productModel.length,
+        itemBuilder: (context, index) {
+          final product = widget.productModel[index];
+          return ProductCard(product: product);
+        },
+      ),
     );
   }
+
 }
 
 class ProductCard extends StatelessWidget {

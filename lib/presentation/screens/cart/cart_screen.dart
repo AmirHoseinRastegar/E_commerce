@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/cart/cart_bloc.dart';
 import '../../widgets/cart_items.dart';
-import '../home/prdocut_details_screen.dart';
 
 class CartScreen extends StatefulWidget {
   static const screenRout = '/';
