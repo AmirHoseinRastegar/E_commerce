@@ -34,6 +34,7 @@ void main() async {
 
   runApp(const MyApp());
 }
+GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

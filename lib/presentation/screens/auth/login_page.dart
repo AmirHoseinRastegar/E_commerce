@@ -1,13 +1,10 @@
 import 'package:firebase_e_commerce/core/loading.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
-import 'package:firebase_e_commerce/presentation/screens/home/home_screen_navigator.dart';
 import 'package:firebase_e_commerce/presentation/widgets/elevated_button_widget.dart';
 import 'package:firebase_e_commerce/presentation/widgets/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../home/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   static const screenRout = 'Login_screen';
@@ -66,73 +63,77 @@ class _LoginPageState extends State<LoginPage> {
             return const LoadingPage();
           }
           return SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextFormField(
-                      hintText: 'email',
-                      controller: emailController,
-                      obscure: false,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "please enter your email";
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomTextFormField(
-                        hintText: 'Password',
-                        controller: passwordController,
-                        obscure: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "please enter your password";
-                          }
-                        }),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomElevatedButton(
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          context.read<AuthBloc>().add(LoginEvent(
-                              email: emailController.text,
-                              password: passwordController.text));
-                        }
-                      },
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                            fontSize: 25, color: Colors.grey.shade100),
-                      ),
-                    ),
-                    Row(
+            child: Center(
+              child: ListView(shrinkWrap: true, children: [
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Don\'t have an account?',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
+                        CustomTextFormField(
+                          hintText: 'email',
+                          controller: emailController,
+                          obscure: false,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "please enter your email";
+                            }
+                          },
                         ),
-                        TextButton(
-                          onPressed: widget.onTap,
-                          child: const Text(
-                            'Sign Up',
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextFormField(
+                            hintText: 'Password',
+                            controller: passwordController,
+                            obscure: true,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "please enter your password";
+                              }
+                            }),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomElevatedButton(
+                          onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<AuthBloc>().add(LoginEvent(
+                                  email: emailController.text,
+                                  password: passwordController.text));
+                            }
+                          },
+                          child: Text(
+                            'Login',
                             style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.w700),
+                                fontSize: 25, color: Colors.grey.shade100),
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Don\'t have an account?',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+                            TextButton(
+                              onPressed: widget.onTap,
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w700),
+                              ),
+                            )
+                          ],
                         )
                       ],
-                    )
-                  ],
+                    ),
+                  ),
                 ),
-              ),
+              ]),
             ),
           );
         },

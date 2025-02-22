@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_e_commerce/core/failure.dart';
 import 'package:firebase_e_commerce/data/model/user_model.dart';
 import 'package:firebase_e_commerce/domain/repository/auth_repository.dart';
 import 'package:firebase_e_commerce/domain/usecases/login_usecase.dart';
@@ -25,6 +24,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }) : super(AuthInitial()) {
     on<SignUpEvent>(onSignUp);
     on<LoginEvent>(onLogin);
+    on<LogOutEvent>(onLogOut);
+  }
+
+  Future<void> onLogOut(LogOutEvent event, Emitter<AuthState> emit) async {
+    try {
+      emit(AuthLoading());
+      final res = await authRepository.logOut();
+      res.fold((l) => emit(AuthError(message: l.message)), (r) {
+        emit(AuthLogOutSuccess());
+      });
+    } catch (e) {
+      emit(AuthError(message: e.toString()));
+    }
   }
 
   Future<void> onSignUp(SignUpEvent event, Emitter<AuthState> emit) async {

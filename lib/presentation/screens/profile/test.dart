@@ -37,7 +37,7 @@ class ProductModel2 {
 
 
 class ProductUploader extends StatelessWidget {
-  static const String screenRout = '/';
+  static const String screenRout = '/Test';
   final List<ProductModel2> products = [
     ProductModel2(
         name: 'Product 1',

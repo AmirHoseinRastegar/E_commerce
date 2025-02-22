@@ -9,7 +9,9 @@ class LoadingPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: LoadingAnimationWidget.staggeredDotsWave(
+
             color: Colors.red.shade700, size: 50),
+
       ),
     );
   }

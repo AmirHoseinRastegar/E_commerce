@@ -164,7 +164,7 @@ class CategoryWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        '\$${product.price}',
+                        '\$${product.price.toStringAsFixed(2)}',
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.green,

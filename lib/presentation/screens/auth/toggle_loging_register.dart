@@ -3,7 +3,7 @@ import 'package:firebase_e_commerce/presentation/screens/auth/sign_up_page.dart'
 import 'package:flutter/material.dart';
 
 class ToggleLoginRegister extends StatefulWidget {
-  static const screenRout= '/toggle_login_register_screen';
+  static const screenRout= '/toggle';
 
   const ToggleLoginRegister({super.key});
 

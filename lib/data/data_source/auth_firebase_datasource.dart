@@ -10,6 +10,8 @@ abstract class AuthFirebaseDatasource {
     String email,
     String password,
   );
+
+  Future<void> logOut();
 }
 
 class AuthFireBaseImpl implements AuthFirebaseDatasource {
@@ -52,7 +54,7 @@ class AuthFireBaseImpl implements AuthFirebaseDatasource {
         password: password,
       );
       final user = res.user?.uid;
-    
+
       final user2 = await firebaseFireStore.collection('users').doc(user).get();
 
       return UserModel(
@@ -62,6 +64,15 @@ class AuthFireBaseImpl implements AuthFirebaseDatasource {
           uid: user!);
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<void> logOut() async {
+    try {
+      await firebaseAuth.signOut();
+    } catch (e) {
+      throw Exception('Failed');
     }
   }
 }

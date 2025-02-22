@@ -1,8 +1,8 @@
+import 'package:firebase_e_commerce/core/loading.dart';
 import 'package:firebase_e_commerce/domain/repository/auth_repository.dart';
 import 'package:firebase_e_commerce/main_wrapper.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/toggle_loging_register.dart';
-import 'package:firebase_e_commerce/presentation/screens/home/home_screen.dart';
-import 'package:firebase_e_commerce/presentation/screens/auth/login_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +25,7 @@ class PersistLogin extends StatelessWidget {
           if (state is UnAuthenticated) {
             return const ToggleLoginRegister();
           }
-          return Container();
+          return const Center(child: LoadingPage());
         },
       )),
     );

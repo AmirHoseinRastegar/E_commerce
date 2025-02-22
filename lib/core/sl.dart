@@ -25,6 +25,7 @@ import 'package:firebase_e_commerce/presentation/blocs/product_details/product_d
 import 'package:get_it/get_it.dart';
 
 import '../data/data_source/auth_firebase_datasource.dart';
+import '../data/model/user_model.dart';
 import '../data/repository/auth_repositoryimpl.dart';
 import '../domain/usecases/search_usecase.dart';
 import '../domain/usecases/signup_usecase.dart';
