@@ -12,12 +12,12 @@ class UserModel {
       required this.email,
       required this.uid});
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModel.fromJson(Map<String, dynamic> json,String uid) {
     return UserModel(
-      name: json['name'],
-      email: json['email'],
-      uid: json['uid'],
-      createdAT: json['created_at'],
+      name: json['name']??'',
+      email: json['email']??'',
+      uid: uid,
+      createdAT: json['created_at']??'',
     );
   }
 

@@ -28,6 +28,7 @@ class AuthFireBaseImpl implements AuthFirebaseDatasource {
       final credentials = await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
+
       );
       final user = credentials.user?.uid;
       await firebaseFireStore

@@ -15,8 +15,18 @@ class UserDataSourceImpl implements UserDataSource{
 
   @override
   Future<UserModel> editUserData(UserModel user)async{
-   await fireStore.collection('users').doc(user.uid).update(user.toJson());
-   final updatedUser= await fireStore.collection('users').doc(user.uid).get();
-   return UserModel.fromJson(updatedUser.data()!);
+    final userRef = fireStore.collection('users').doc(user.uid);
+    print('User UID: ${user.uid}');
+
+    final userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      throw Exception('User document not found for UID: ${user.uid}');
+    }
+
+    await userRef.update(user.toJson());
+
+    final updatedUser = await userRef.get();
+    return UserModel.fromJson(updatedUser.data()!,user.uid);
   }
 }

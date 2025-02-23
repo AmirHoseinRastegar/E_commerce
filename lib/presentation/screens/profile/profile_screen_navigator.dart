@@ -32,8 +32,8 @@ class _ProfileScreenNavigatorState extends State<ProfileScreenNavigator> {
                   return  ProfileScreen(fireStore: sl<FirebaseFirestore>(),);
                 case ProductUploader.screenRout:
                   return ProductUploader();
-                case EditInfoScreen.screenRout:
-                  return EditInfoScreen();
+                // case EditInfoScreen.screenRout:
+                //   return EditInfoScreen();
               }
               return Container();
             },

@@ -4,9 +4,11 @@ import 'package:firebase_e_commerce/main_wrapper.dart';
 import 'package:firebase_e_commerce/presentation/blocs/auth/auth_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/cart/cart_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/categories/categories_bloc.dart';
+import 'package:firebase_e_commerce/presentation/blocs/edit_user_cubit/edit_user_data_cubit.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product_details/product_details_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/search/search_bloc.dart';
+import 'package:firebase_e_commerce/presentation/blocs/user/user_cubit.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/onboarding.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/persist_login.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/splash_screen.dart';
@@ -45,6 +47,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => sl<AuthBloc>(),
+        ),   BlocProvider(
+          create: (_) => sl<EditUserDataCubit>(),
         ),
         BlocProvider(
           create: (context) => sl<ProductBloc>(),
