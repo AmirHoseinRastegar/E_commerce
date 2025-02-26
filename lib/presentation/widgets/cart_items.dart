@@ -104,9 +104,9 @@ class CartItem extends StatelessWidget {
                     ),
                     Text(
                       cartItem.discount != 0
-                          ? (cartItem.price - cartItem.discount)
-                                  .toStringAsFixed(2) *
-                              cartItem.quantity
+                          ? (cartItem.price - cartItem.discount
+                                  *
+                              cartItem.quantity).toStringAsFixed(2)
                           : '',
                     ),
                   ],

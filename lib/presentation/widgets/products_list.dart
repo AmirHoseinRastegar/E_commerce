@@ -16,7 +16,7 @@ class _ProductsListState extends State<ProductsList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
+      height: 220,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -29,7 +29,6 @@ class _ProductsListState extends State<ProductsList> {
       ),
     );
   }
-
 }
 
 class ProductCard extends StatelessWidget {
@@ -47,29 +46,55 @@ class ProductCard extends StatelessWidget {
         Navigator.pushNamed(context, ProductDetailsScreen.screenRout,
             arguments: product.id);
       },
-      child: Container(
-        width: 100,
-        height: 100,
-        margin: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 10,
-              offset: const Offset(2, 0),
+      child: Column(
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            margin: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(2, 0),
+                ),
+              ],
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
-          child: CachedNetworkImage(
-            fit: BoxFit.fill,
-            imageUrl: product.imageUrl,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: CachedNetworkImage(
+                fit: BoxFit.fill,
+                imageUrl: product.imageUrl,
+              ),
+            ),
           ),
-        ),
+          Text(
+            product.name,
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: 100,
+            // Set a fixed width for the description container
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            // Add some padding
+            child: Text(
+              product.description,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 15),
+              maxLines: 3,
+            ),
+          ),
+        ],
       ),
     );
   }

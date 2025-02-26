@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/model/user_model.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/user/user_cubit.dart';
 import '../home/home_screen_navigator.dart';
@@ -34,23 +33,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _fetchUserData();
   }
 
-  // Future<UserModel> getUserInfo() async {
-  //   final User? user = FirebaseAuth.instance.currentUser;
-  //
-  //   try {
-  //     final userDoc =
-  //         await widget.fireStore.collection('users').doc(user?.uid).get();
-  //     if (!userDoc.exists) {
-  //       throw Exception('User document does not exist');
-  //     }
-  //     final userModel = UserModel.fromJson(userDoc.data()!);
-  //
-  //     return userModel;
-  //   } catch (e) {
-  //     throw Exception('Failed:$e');
-  //   }
-  // }
-
   Future<void> _fetchUserData() async {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
@@ -62,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       widget.fireStore
           .collection('users')
           .doc(user.uid)
-          .snapshots()  // Listen to real-time changes
+          .snapshots() // Listen to real-time changes
           .listen((userDoc) {
         if (userDoc.exists) {
           setState(() {
@@ -78,7 +60,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -93,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: BlocConsumer<UserCubit, UserState>(
           listener: (context, state) {
             if (state is UserSuccess) {
-              Navigator.of(context,rootNavigator: true)
+              Navigator.of(context, rootNavigator: true)
                   .push(EditInfoScreen.route(state.userModel));
             }
             if (state is UserError) {
@@ -102,8 +83,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             }
           },
           builder: (context, state) {
-            if(state is UserLoading){
-              return const Center(child: CircularProgressIndicator(),);
+            if (state is UserLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
             return SingleChildScrollView(
               child: Padding(
@@ -143,8 +126,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Colors.black.withOpacity(0.58),
                         ),
                         TextButton(
-                          onPressed: ()  {
-                          context.read<UserCubit>().getUser();
+                          onPressed: () {
+                            context.read<UserCubit>().getUser();
                           },
                           child: Text(
                             'Edit Info',
@@ -166,12 +149,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         BlocListener<AuthBloc, AuthState>(
                           listener: (context, state) {
                             if (state is AuthLogOutSuccess) {
-                              homeKey.currentState
-                                  ?.popUntil((route) => route.isFirst);
-                              profileKey.currentState
-                                  ?.popUntil((route) => route.isFirst);
-                              cartKey.currentState
-                                  ?.popUntil((route) => route.isFirst);
+                              // homeKey.currentState
+                              //     ?.popUntil((route) => route.isFirst);
+                              // profileKey.currentState
+                              //     ?.popUntil((route) => route.isFirst);
+                              // cartKey.currentState
+                              //     ?.popUntil((route) => route.isFirst);
                               Navigator.of(context, rootNavigator: true)
                                   .pushNamedAndRemoveUntil(
                                 ToggleLoginRegister.screenRout,
@@ -186,7 +169,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               }
                               return TextButton(
                                 onPressed: () {
-                                  context.read<AuthBloc>().add(LogOutEvent());
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text('Are You Sure?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              context
+                                                  .read<AuthBloc>()
+                                                  .add(LogOutEvent());
+                                            },
+                                            child: const Text("Yes"),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text(
+                                              "No",
+                                              style:
+                                                  TextStyle(color: Colors.red),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                                 child: Text(
                                   'Sign Out',

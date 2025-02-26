@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:firebase_e_commerce/data/model/product_model.dart';
 import 'package:firebase_e_commerce/presentation/screens/home/prdocut_details_screen.dart';
 import 'package:firebase_e_commerce/presentation/widgets/shimmer_loading_widget.dart';
@@ -117,7 +119,7 @@ class CategoryWidget extends StatelessWidget {
                           width: double.infinity,
                           height: double.infinity,
                           color: Colors.grey[300], // Light grey background
-                          child:  Center(
+                          child: Center(
                             child: Container(),
                           ),
                         ),
@@ -163,6 +165,15 @@ class CategoryWidget extends StatelessWidget {
                         maxLines: 1,
                       ),
                       const SizedBox(height: 5),
+                      if (product.isDiscounted)
+                        Text(
+                          (product.price - product.discount).toStringAsFixed(2),
+                          style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w500,
+                              decoration: TextDecoration.lineThrough),
+                        ),
                       Text(
                         '\$${product.price.toStringAsFixed(2)}',
                         style: const TextStyle(

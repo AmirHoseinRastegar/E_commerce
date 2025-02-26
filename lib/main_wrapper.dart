@@ -75,9 +75,20 @@ class _MainWrapperState extends State<MainWrapper> {
           currentIndex: selectedIndex,
           onTap: (index) {
             setState(() {
-              history.remove(selectedIndex);
-              history.add(selectedIndex);
-              selectedIndex = index;
+              if (selectedIndex == index) {
+                // If home is already selected, pop to the root of the home navigator
+                if (index == homeIndex) {
+                  _navigatorKeys[homeIndex].currentState!.popUntil((route) => route.isFirst);
+                }if(index== cartIndex){
+                  _navigatorKeys[cartIndex].currentState!.popUntil((route) => route.isFirst);
+                }if(index==profileIndex){
+                  _navigatorKeys[profileIndex].currentState!.popUntil((route) => route.isFirst);
+                }
+              } else {
+                history.remove(selectedIndex);
+                history.add(selectedIndex);
+                selectedIndex = index;
+              }
             });
           },
           items: const [
