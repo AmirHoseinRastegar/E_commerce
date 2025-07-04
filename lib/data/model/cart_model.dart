@@ -2,7 +2,7 @@ class CartModel {
   final String productId;
   final String name;
   final double price;
-  final double discount; // Make it non-nullable
+  final double discount;
   final String imageUrl;
   final int quantity;
 

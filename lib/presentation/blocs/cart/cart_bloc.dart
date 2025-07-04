@@ -28,8 +28,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               (cartList) => CartSuccess(cartList), // Handle success
             );
           },
-          onError: (error, stackTrace) =>
-              CartError(error.toString()),
+          onError: (error, stackTrace) => CartError(error.toString()),
         );
       } catch (e) {
         emit(CartError(e.toString()));
@@ -40,7 +39,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       try {
         await cartRepository.addToCart(event.cartItem, event.userId);
         emit(AddToCartButtonSuccess());
-        add(LoadCartItems( userId: event.userId,));
+        add(LoadCartItems(
+          userId: event.userId,
+        ));
       } catch (e) {
         emit(CartError(e.toString()));
       }
@@ -56,6 +57,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       try {
         await cartRepository.updateQuantity(
             event.userId, event.productId, event.newQuantity);
+      } catch (e) {
+        emit(CartError(e.toString()));
+      }
+    });
+    on<ClearCart>((event, emit) async {
+      try {
+        await cartRepository.clearCart(event.userId);
+        emit(CartSuccess([]));
       } catch (e) {
         emit(CartError(e.toString()));
       }

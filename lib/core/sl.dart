@@ -6,11 +6,13 @@ import 'package:firebase_e_commerce/data/data_source/search_datasource.dart';
 import 'package:firebase_e_commerce/data/repository/carousel_repositoryimpl.dart';
 import 'package:firebase_e_commerce/data/repository/cart_repositoryimpl.dart';
 import 'package:firebase_e_commerce/data/repository/product_repositoryimpl.dart';
+import 'package:firebase_e_commerce/data/repository/receipt_repository_impl.dart';
 import 'package:firebase_e_commerce/data/repository/search_repositoryimpl.dart';
 import 'package:firebase_e_commerce/domain/repository/auth_repository.dart';
 import 'package:firebase_e_commerce/domain/repository/carousel_repository.dart';
 import 'package:firebase_e_commerce/domain/repository/cart_repository.dart';
 import 'package:firebase_e_commerce/domain/repository/product_repository.dart';
+import 'package:firebase_e_commerce/domain/repository/receipt_repository.dart';
 import 'package:firebase_e_commerce/domain/repository/search_repository.dart';
 import 'package:firebase_e_commerce/domain/usecases/carousel_usecase.dart';
 import 'package:firebase_e_commerce/domain/usecases/category_usecase.dart';
@@ -23,6 +25,7 @@ import 'package:firebase_e_commerce/presentation/blocs/categories/categories_blo
 import 'package:firebase_e_commerce/presentation/blocs/edit_user_cubit/edit_user_data_cubit.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product_details/product_details_bloc.dart';
+import 'package:firebase_e_commerce/presentation/blocs/receipt/receipt_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../data/data_source/auth_firebase_datasource.dart';
@@ -49,7 +52,8 @@ void setUpDependencies() {
   sl.registerLazySingleton<ProductRepository>(
       () => ProductRepositoryImpl(productDataSource: sl()));
   sl.registerLazySingleton<ProductDataSource>(
-      () => ProductDataSourceImpl(db: sl()));  sl.registerLazySingleton<UserDataSource>(
+      () => ProductDataSourceImpl(db: sl()));
+  sl.registerLazySingleton<UserDataSource>(
       () => UserDataSourceImpl(fireStore: sl()));
   sl.registerLazySingleton<SearchDataSource>(
       () => SearchDataSourceImpl(firebaseFireStore: sl()));
@@ -58,7 +62,7 @@ void setUpDependencies() {
   sl.registerLazySingleton<SearchRepository>(
       () => SearchRepositoryImpl(searchDataSource: sl()));
   sl.registerLazySingleton<EditUserRepository>(
-      () => EditUserRepositoryImpl( sl<UserDataSource>()));
+      () => EditUserRepositoryImpl(sl<UserDataSource>()));
   sl.registerLazySingleton<CarouselDataSource>(
       () => CarouselDataSourceImpl(db: sl()));
   sl.registerLazySingleton(() => SignUpUseCase(authRepository: sl()));
@@ -72,7 +76,7 @@ void setUpDependencies() {
   sl.registerFactory(() =>
       AuthBloc(signUpUseCase: sl(), authRepository: sl(), loginUseCase: sl()));
   sl.registerFactory(() => CartBloc(cartRepository: sl()));
-  sl.registerFactory(() => EditUserDataCubit( sl<EditUserRepository>()));
+  sl.registerFactory(() => EditUserDataCubit(sl<EditUserRepository>()));
   sl.registerFactory(() => SearchBloc(searchUseCase: sl()));
   sl.registerFactory(() => CategoriesBloc(categoryUseCase: sl()));
   sl.registerFactory(() => ProductDetailsBloc(productRepository: sl()));
@@ -80,4 +84,7 @@ void setUpDependencies() {
       fetchProductUseCase: sl(),
       carouselUseCase: sl(),
       fetchDiscountedUseCase: sl()));
+  sl.registerLazySingleton<ReceiptRepository>(
+      () => ReceiptRepositoryImpl( sl()));
+  sl.registerFactory(() => ReceiptBloc(receiptRepository: sl()));
 }

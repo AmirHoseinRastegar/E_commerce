@@ -7,6 +7,7 @@ import 'package:firebase_e_commerce/presentation/blocs/categories/categories_blo
 import 'package:firebase_e_commerce/presentation/blocs/edit_user_cubit/edit_user_data_cubit.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product/product_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/product_details/product_details_bloc.dart';
+import 'package:firebase_e_commerce/presentation/blocs/receipt/receipt_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/search/search_bloc.dart';
 import 'package:firebase_e_commerce/presentation/blocs/user/user_cubit.dart';
 import 'package:firebase_e_commerce/presentation/screens/auth/onboarding.dart';
@@ -36,6 +37,7 @@ void main() async {
 
   runApp(const MyApp());
 }
+
 GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
@@ -47,31 +49,41 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => sl<AuthBloc>(),
-        ),   BlocProvider(
+        ),
+        BlocProvider(
           create: (_) => sl<EditUserDataCubit>(),
         ),
         BlocProvider(
           create: (context) => sl<ProductBloc>(),
-        ),    BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => sl<ProductDetailsBloc>(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => sl<CategoriesBloc>(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => sl<CartBloc>(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => sl<SearchBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<ReceiptBloc>(),
         ),
       ],
       child: MaterialApp(
-
         initialRoute: SplashScreen.screenRout,
         routes: {
-          HomeScreenNavigator.screenRout: (context) => const HomeScreenNavigator(),
+          HomeScreenNavigator.screenRout: (context) =>
+              const HomeScreenNavigator(),
           HomeScreen.screenRout: (context) => const HomeScreen(),
           CategoriesView.screenRout: (context) => const CategoriesView(),
           MainWrapper.screenRout: (context) => const MainWrapper(),
-          CartScreenNavigator.screenRout: (context) => const CartScreenNavigator(),
-          ProfileScreenNavigator.screenRout: (context) => const ProfileScreenNavigator(),
+          CartScreenNavigator.screenRout: (context) =>
+              const CartScreenNavigator(),
+          ProfileScreenNavigator.screenRout: (context) =>
+              const ProfileScreenNavigator(),
           SplashScreen.screenRout: (context) => const SplashScreen(),
           ToggleLoginRegister.screenRout: (context) =>
               const ToggleLoginRegister(),

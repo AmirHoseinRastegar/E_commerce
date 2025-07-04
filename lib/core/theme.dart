@@ -60,7 +60,7 @@ class AppTheme {
           color: AppColors.textSecondaryColor,
         ),
       ),
-      errorColor: AppColors.errorColor,
+      cardColor: AppColors.errorColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
   }

@@ -82,5 +82,11 @@ class CartRepositoryImpl implements CartRepository {
       return left(Failure(e.toString()));
     }
   }
+  
+  @override
+  Future<Either<Failure, void>> clearCart(String userId) {
+    // TODO: implement clearCart
+    throw UnimplementedError();
+  }
 
 }
